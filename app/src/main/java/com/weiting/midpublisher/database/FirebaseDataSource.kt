@@ -15,15 +15,22 @@ object FirebaseDataSource : FirebaseSource {
         database.collection("articles")
             .get()
             .addOnSuccessListener { result ->
-                for (document in result) {
-                    list += result.toObjects(ArticleData::class.java)
-                    Log.i("get data", "$list")
+
+                //為啥取不出來?! 我問號?!
+                //為啥我換到publish就有資料了? 我更問號?
+                val datalist = result.toObjects(ArticleData::class.java)
+
+                for (i in 0 until datalist.size){
+                    list += datalist[i]
                 }
+
+                Log.i("get data", "$list")
             }
             .addOnFailureListener { e ->
                 Log.w("Error to get data", e)
             }
 
+        Log.i("get data", "$list")
         return list
     }
 

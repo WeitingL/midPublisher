@@ -4,9 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.firestore.FirebaseFirestore
 import com.weiting.midpublisher.database.ArticleData
-import com.weiting.midpublisher.database.FirebaseDataRepository
 import com.weiting.midpublisher.database.FirebaseRepository
 
 class MainViewModel(private val firebaseDataRepository: FirebaseRepository) : ViewModel() {
@@ -25,8 +23,9 @@ class MainViewModel(private val firebaseDataRepository: FirebaseRepository) : Vi
     }
 
     private fun getRequestData() {
-        Log.i("Get", "Get Data Start")
+        Log.i("data", "MainViewModel")
        _requestData.value = firebaseDataRepository.getArticle()
+        Log.i("Data Where?", _requestData.value.toString())
     }
 
     fun refreshData(){
@@ -34,6 +33,5 @@ class MainViewModel(private val firebaseDataRepository: FirebaseRepository) : Vi
         getRequestData()
         _refreshState.value = false
     }
-
 
 }

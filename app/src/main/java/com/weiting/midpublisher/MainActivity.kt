@@ -2,6 +2,7 @@ package com.weiting.midpublisher
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.weiting.midpublisher.Factory.MainViewModelFactory
 import com.weiting.midpublisher.databinding.ActivityMainBinding
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         val viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         viewModel.requestData.observe(this) {
+            Log.i("data Coming", it.toString())
             adapter.submitList(it)
         }
 
