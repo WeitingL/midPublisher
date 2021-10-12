@@ -3,7 +3,7 @@ package com.weiting.midpublisher.database
 import java.util.*
 
 
-data class ArticalData(
+data class ArticleData(
     val author: AuthorData? = null,
     val title: String? = null,
     val content: String? = null,

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="articalData"
-            type="com.weiting.midpublisher.database.ArticalData" />
+            type="com.weiting.midpublisher.database.ArticleData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">midPublisher</string>
+    <string-array name="category">
+        <item>Beauty</item>
+        <item>Gossiping</item>
+        <item>IU</item>
+    </string-array>
 </resources>
