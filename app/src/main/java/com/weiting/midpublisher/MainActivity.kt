@@ -2,6 +2,7 @@ package com.weiting.midpublisher
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.weiting.midpublisher.databinding.ActivityMainBinding
 
@@ -25,6 +26,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.refreshData()
+        }
+
+        binding.imageButton.setOnClickListener {
+            PublishDialog().show(supportFragmentManager, "Published")
         }
 
         binding.rvArticle.adapter = adapter
