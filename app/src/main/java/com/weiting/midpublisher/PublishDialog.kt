@@ -38,23 +38,33 @@ class PublishDialog : AppCompatDialogFragment() {
                     UserBottomSheet().show(parentFragmentManager, "Login")
                 }
                 false -> {
-                    val articleData = ArticleData(
-                        AuthorData(
-                            UserManager.sharedPreference.getString("email", null),
-                            UserManager.sharedPreference.getString("id", null),
-                            UserManager.sharedPreference.getString("name", null)
-                        ),
-                        title = binding.tvPublishTitle.text.toString(),
-                        content = binding.etvContent.text.toString(),
-                        created = SimpleDateFormat("yyyy.MM.dd hh:mm", Locale.TAIWAN).format(
-                            Calendar.getInstance().timeInMillis
-                        ),
-                        id = viewModel.getFirebaseId(),
-                        category = getCategory(binding)
-                    )
 
-                    viewModel.getArticleInfo(articleData)
-                    Toast.makeText(context, "Article is Published!", Toast.LENGTH_LONG).show()
+                    if (inputCheck(binding)) {
+                        val articleData = ArticleData(
+                            AuthorData(
+                                UserManager.sharedPreference.getString("email", null),
+                                UserManager.sharedPreference.getString("id", null),
+                                UserManager.sharedPreference.getString("name", null)
+                            ),
+                            title = binding.tvPublishTitle.text.toString(),
+                            content = binding.etvContent.text.toString(),
+                            created = SimpleDateFormat("yyyy.MM.dd hh:mm", Locale.TAIWAN).format(
+                                Calendar.getInstance().timeInMillis
+                            ),
+                            id = viewModel.getFirebaseId(),
+                            category = getCategory(binding)
+                        )
+
+                        viewModel.getArticleInfo(articleData)
+                        Toast.makeText(context, "Article is Published!", Toast.LENGTH_LONG).show()
+
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "There are something wrong. Please the the input!",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
             }
         }
@@ -82,6 +92,17 @@ class PublishDialog : AppCompatDialogFragment() {
             2 -> "IU"
             else -> "Other"
         }
+    }
+
+    private fun inputCheck(binding: PublishPageBinding): Boolean {
+        return if (binding.etvContent.text.isEmpty()) {
+            false
+        } else if (binding.tvPublishTitle.text.isEmpty()) {
+            false
+        } else {
+            true
+        }
+
     }
 
 

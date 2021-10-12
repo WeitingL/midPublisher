@@ -2,7 +2,6 @@ package com.weiting.midpublisher
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.weiting.midpublisher.databinding.ActivityMainBinding
 
@@ -11,7 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
-        val adapter = ArticalRecyclerView()
+        val adapter = ArticleRecyclerViewAdapter()
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         viewModel.requestData.observe(this) {
