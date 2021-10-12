@@ -6,10 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.weiting.midpublisher.database.ArticleData
+import com.weiting.midpublisher.database.FirebaseDataRepository
+import com.weiting.midpublisher.database.FirebaseRepository
 
-class MainViewModel : ViewModel() {
-
-    private val database = FirebaseFirestore.getInstance()
+class MainViewModel(private val firebaseDataRepository: FirebaseRepository) : ViewModel() {
 
     private val _requestData = MutableLiveData<List<ArticleData>>()
     val requestData: LiveData<List<ArticleData>>
@@ -26,20 +26,7 @@ class MainViewModel : ViewModel() {
 
     private fun getRequestData() {
         Log.i("Get", "Get Data Start")
-
-        database.collection("articles")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    val list = result.toObjects(ArticleData::class.java)
-
-                    _requestData.value = list
-                    Log.i("get data", "$list")
-                }
-            }
-            .addOnFailureListener { e ->
-                Log.w("Error to get data", e)
-            }
+       _requestData.value = firebaseDataRepository.getArticle()
     }
 
     fun refreshData(){

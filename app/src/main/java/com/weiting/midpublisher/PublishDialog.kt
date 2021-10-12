@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import com.weiting.midpublisher.Factory.PublishViewModelFactory
 import com.weiting.midpublisher.database.ArticleData
 import com.weiting.midpublisher.database.AuthorData
 import com.weiting.midpublisher.databinding.PublishPageBinding
@@ -16,7 +17,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class PublishDialog : AppCompatDialogFragment() {
-
 
     override fun onStart() {
         super.onStart()
@@ -30,7 +30,8 @@ class PublishDialog : AppCompatDialogFragment() {
     ): View? {
         val binding =
             PublishPageBinding.inflate(inflater, container, false)
-        val viewModel = ViewModelProvider(this).get(PublishViewModel::class.java)
+        val viewModelFactory = PublishViewModelFactory(application.firebaseDataRepository)
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(PublishViewModel::class.java)
 
         binding.btSubmit.setOnClickListener {
             when (UserManager.sharedPreference.getString("id", null).isNullOrEmpty()) {
