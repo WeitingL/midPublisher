@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.weiting.midpublisher.database.ArticleData
 import com.weiting.midpublisher.database.AuthorData
 import com.weiting.midpublisher.databinding.PublishPageBinding
+import java.text.SimpleDateFormat
 import java.util.*
 
 class PublishDialog : AppCompatDialogFragment() {
@@ -32,8 +33,8 @@ class PublishDialog : AppCompatDialogFragment() {
         val viewModel = ViewModelProvider(this).get(PublishViewModel::class.java)
 
         binding.btSubmit.setOnClickListener {
-            when(UserManager.sharedPreference.getString("id", null).isNullOrEmpty()){
-                true ->{
+            when (UserManager.sharedPreference.getString("id", null).isNullOrEmpty()) {
+                true -> {
                     UserBottomSheet().show(parentFragmentManager, "Login")
                 }
                 false -> {
@@ -45,7 +46,9 @@ class PublishDialog : AppCompatDialogFragment() {
                         ),
                         title = binding.tvPublishTitle.text.toString(),
                         content = binding.etvContent.text.toString(),
-                        created = Calendar.getInstance().time.toString(),
+                        created = SimpleDateFormat("yyyy.MM.dd hh:mm", Locale.TAIWAN).format(
+                            Calendar.getInstance().timeInMillis
+                        ),
                         id = viewModel.getFirebaseId(),
                         category = getCategory(binding)
                     )
@@ -59,21 +62,21 @@ class PublishDialog : AppCompatDialogFragment() {
         return binding.root
     }
 
-    private fun reSize(){
-        if (null != dialog){
+    private fun reSize() {
+        if (null != dialog) {
             val window = dialog!!.window
 
             val layoutParams = dialog!!.window?.attributes
             layoutParams?.height = 1500
             layoutParams?.width = 1000
-            if (dialog != null){
+            if (dialog != null) {
                 window?.setLayout(layoutParams!!.width, layoutParams.height)
             }
         }
     }
 
-    private fun getCategory(binding: PublishPageBinding):String{
-        return when(binding.spCategory.selectedItemPosition){
+    private fun getCategory(binding: PublishPageBinding): String {
+        return when (binding.spCategory.selectedItemPosition) {
             0 -> "Beauty"
             1 -> "Gossiping"
             2 -> "IU"
