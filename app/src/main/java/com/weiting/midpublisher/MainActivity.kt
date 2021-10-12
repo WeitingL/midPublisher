@@ -17,6 +17,16 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(it)
         }
 
+        viewModel.refreshState.observe(this){
+            if (it == false){
+                binding.swipeRefreshLayout.isRefreshing = it
+            }
+        }
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.refreshData()
+        }
+
         binding.rvArticle.adapter = adapter
         setContentView(binding.root)
     }

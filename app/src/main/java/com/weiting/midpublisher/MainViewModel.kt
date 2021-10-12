@@ -15,8 +15,13 @@ class MainViewModel : ViewModel() {
     val requestData: LiveData<List<ArticalData>>
         get() = _requestData
 
+    private val _refreshState = MutableLiveData<Boolean>()
+    val refreshState : LiveData<Boolean>
+        get() = _refreshState
+
     init {
         getRequestData()
+        _refreshState.value = false
     }
 
     private fun getRequestData() {
@@ -35,8 +40,12 @@ class MainViewModel : ViewModel() {
             .addOnFailureListener { e ->
                 Log.w("Error to get data", e)
             }
+    }
 
-
+    fun refreshData(){
+        _refreshState.value = true
+        getRequestData()
+        _refreshState.value = false
     }
 
 
