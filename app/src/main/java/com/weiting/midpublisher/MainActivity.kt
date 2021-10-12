@@ -10,10 +10,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
+        val adapter = ArticalRecyclerView()
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+        viewModel.requestData.observe(this) {
+            adapter.submitList(it)
+        }
 
-
+        binding.rvArticle.adapter = adapter
         setContentView(binding.root)
     }
 }

@@ -26,7 +26,10 @@ class MainViewModel : ViewModel() {
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-                    Log.i("get data", "${document.id} , ${document.data}")
+                    val list = result.toObjects(ArticalData::class.java)
+
+                    _requestData.value = list
+                    Log.i("get data", "$list")
                 }
             }
             .addOnFailureListener { e ->
