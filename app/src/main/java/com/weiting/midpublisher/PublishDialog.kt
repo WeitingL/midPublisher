@@ -25,6 +25,10 @@ class PublishDialog : AppCompatDialogFragment() {
         val binding =
             PublishPageBinding.inflate(inflater, container, false)
 
+        binding.btSubmit.setOnClickListener {
+            UserBottomSheet().show(parentFragmentManager, "Login")
+        }
+
 
         return binding.root
     }
