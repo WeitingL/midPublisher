@@ -20,17 +20,19 @@ object FirebaseDataSource : FirebaseSource {
                 //為啥我換到publish就有資料了? 我更問號?
                 val datalist = result.toObjects(ArticleData::class.java)
 
-                for (i in 0 until datalist.size){
-                    list += datalist[i]
-                }
+                list += datalist
 
-                Log.i("get data", "$list")
+//                for (i in 0 until datalist.size){
+//                    list += datalist[i]
+//                }
+
+                Log.i("get data in FirebaseDataSource", "$list")
             }
             .addOnFailureListener { e ->
                 Log.w("Error to get data", e)
             }
 
-        Log.i("get data", "$list")
+        Log.i("get data in FirebaseDataSource return", "$list")
         return list
     }
 

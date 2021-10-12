@@ -23,9 +23,9 @@ class MainViewModel(private val firebaseDataRepository: FirebaseRepository) : Vi
     }
 
     private fun getRequestData() {
-        Log.i("data", "MainViewModel")
+        Log.i("where is my data?", "MainViewModel is work")
        _requestData.value = firebaseDataRepository.getArticle()
-        Log.i("Data Where?", _requestData.value.toString())
+        Log.i("where is my data?", _requestData.value.toString())
     }
 
     fun refreshData(){

@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         val viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         viewModel.requestData.observe(this) {
-            Log.i("data Coming", it.toString())
+            Log.i("where is my data? View", it.toString())
             adapter.submitList(it)
         }
 

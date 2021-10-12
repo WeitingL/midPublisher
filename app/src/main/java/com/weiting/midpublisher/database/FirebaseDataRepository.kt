@@ -5,7 +5,7 @@ import android.util.Log
 class FirebaseDataRepository(private val firebaseDataSource: FirebaseSource): FirebaseRepository {
 
     override fun getArticle(): List<ArticleData> {
-        Log.i("Get", "FirebaseDataRepository")
+        Log.i("where is my data?", "FirebaseDataRepository is work")
         return firebaseDataSource.getArticle()
     }
 
